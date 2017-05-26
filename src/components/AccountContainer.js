@@ -6,11 +6,6 @@ class AccountContainer extends Component {
 
   constructor() {
     super()
-
-    // we have provided this default state for you,
-    // use this to get the functionality working
-    // and then replace the default transactions with a call to the API
-
     this.state = {
       searchTerm: '',
       transactions: []
@@ -26,11 +21,9 @@ class AccountContainer extends Component {
 
 
   handleChange(event) {
-    // your code here
     this.setState({
       searchTerm: event.target.value,
     })
-
   }
 
 
@@ -40,7 +33,7 @@ class AccountContainer extends Component {
     return (
       <div>
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
-        <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
+        <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm}/>
       </div>
     )
   }
