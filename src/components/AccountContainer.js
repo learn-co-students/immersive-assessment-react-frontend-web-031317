@@ -46,15 +46,42 @@ class AccountContainer extends Component {
     }
   }
 
-  handleChange(event) {
-    // your code here
+  componentDidMount(){
+    this.setState({
+      transactions: []
+    })
+    const URL = "https://boiling-brook-94902.herokuapp.com/transactions"
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => {
+        data.map((transaction)=>{
+          var trans =
+              {id: transaction.id,
+              posted_at: transaction.posted_at,
+              description: transaction.description,
+              category: transaction.category,
+              amount: transaction.amount}
+          this.setState({
+            transactions: this.state.transactions.concat(trans)
+          })
+
+        })
+      })
+
   }
+
+  handleChange(event) {
+    this.setState({
+      searchTerm: event.target.value
+    })
+  }
+
 
   render() {
 
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
+        <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
         <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
       </div>
     )
