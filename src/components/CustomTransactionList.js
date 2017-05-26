@@ -1,12 +1,9 @@
 import React from 'react'
 import Transaction from "./Transaction"
-import CustomTransactionList from "./CustomTransactionList"
 
-const TransactionsList = (props) => {
-
-if(!props.searchResults) {
-
-  return (
+function CustomTransactionList (props) {
+console.log("YYYYY")
+		return (
     <table className="ui celled striped padded table">
       <tbody>
         <tr>
@@ -32,19 +29,13 @@ if(!props.searchResults) {
           </th>
         </tr>
 
-        {props.transactions.map(function(trans) { return <Transaction transDetail={trans} />})}
+        {props.searchResults.map(function(trans) { return <Transaction transDetail={trans} />})}
 
       </tbody>
 
-    </table>
-  )
-} else {
-  console.log("XXXXXXX")
-    return (
-      <CustomTransactionList searchResults={props.searchResults} />
+    </table> 
     )
-
-  }
+	
 };
 
-export default TransactionsList
+export default CustomTransactionList

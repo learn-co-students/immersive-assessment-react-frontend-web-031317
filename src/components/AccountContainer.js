@@ -7,12 +7,9 @@ class AccountContainer extends Component {
   constructor() {
     super()
 
-    // we have provided this default state for you,
-    // use this to get the functionality working
-    // and then replace the default transactions with a call to the API
 
     this.state = {
-      searchTerm: '',
+      searchResults: '',
       transactions: [
         {
           id: 1,
@@ -44,21 +41,42 @@ class AccountContainer extends Component {
         }
       ]
     }
-  }
+  };
+
+  componentDidMount() {
+    
+    fetch("https://boiling-brook-94902.herokuapp.com/transactions")
+    .then((response) => response.json() )
+    .then((jsonResponse) => this.setState(
+      presentState => ( {transactions: presentState.transactions.concat(jsonResponse) }) 
+      ))
+  };
+
 
   handleChange(event) {
-    // your code here
-  }
+    
+    if(event.target.value) {
+      var capitalizeFirstLetter = event.target.value[0].toUpperCase() + event.target.value.slice(1)
+      console.log(capitalizeFirstLetter)
+      this.setState({
+        searchResults: this.state.transactions.filter((obj)=> obj.category.startsWith(capitalizeFirstLetter))
+      })
+    } else {
+        this.setState({
+          searchResults: ""
+        })
+    }
+};
+
 
   render() {
-
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
-        <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
+        <Search handleChange={this.handleChange.bind(this)} />
+        <TransactionsList transactions={this.state.transactions} searchResults={this.state.searchResults} />
       </div>
     )
   }
-}
+};
 
 export default AccountContainer
