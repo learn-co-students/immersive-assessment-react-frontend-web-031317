@@ -44,17 +44,37 @@ class AccountContainer extends Component {
         }
       ]
     }
+
+    // this.handleChange = this.handleChange(input).bind(this)
   }
 
+  //takes input updates search term
   handleChange(event) {
-    // your code here
+    let newSearchTerm = event.target.value
+    this.setState({
+      searchTerm: newSearchTerm
+    })
+  }
+
+  //makes an api call sets state to transaction data
+  componentDidMount(){
+    this.fetchTransactions()
+  }
+
+  fetchTransactions(){
+    const URL = "https://boiling-brook-94902.herokuapp.com/transactions"
+    fetch(URL).then((res)=>res.json()).then((json)=>{
+      this.setState({
+        transactions: json
+      })
+    })
   }
 
   render() {
 
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
+        <Search searchTerm={this.state.searchTerm} handleChange={(input)=>this.handleChange(input)} />
         <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
       </div>
     )
