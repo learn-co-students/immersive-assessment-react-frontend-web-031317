@@ -81,10 +81,24 @@ class AccountContainer extends Component {
   }
 
   handleChange(event) {
-    this.setState({
-      searchTerm: event.target.value,
-      transactions: this.state.transactions
+    const curses = ["doohickey", "darn", "jerk", "pumpernickel", "shit", "damn", "shoot", "butt", "buttface", "crap", "poop", "fuck", "lake titicaca", "ass"]
+    var theyCursed = false
+
+    curses.forEach(function(curse){
+      if(event.target.value.toLowerCase() === curse){
+        theyCursed = true
+      }
     })
+
+    if(theyCursed){
+      alert("GET THAT FOUL LANGUAGE OUT OF HERE")
+    }else{
+      this.setState({
+        searchTerm: event.target.value,
+        transactions: this.state.transactions
+      })
+    }
+
     // console.log(this.state.searchTerm)
   }
 
