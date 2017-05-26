@@ -34,7 +34,11 @@ class TransactionsList extends React.Component {
           {
           this.props.transactions.map(transaction => {
             // if(transaction.category === this.props.searchTerm){
-            if(transaction.category.indexOf(this.props.searchTerm)!== -1 || transaction.description.indexOf(this.props.searchTerm)!== -1 ){
+            const cat = transaction.category.toLowerCase()
+            const desc = transaction.description.toLowerCase()
+            const searchTerm = this.props.searchTerm.toLowerCase()
+
+            if(cat.indexOf(searchTerm)!== -1 || desc.indexOf(searchTerm)!== -1 ){
               return <Transaction transaction={transaction} />
             }
 
