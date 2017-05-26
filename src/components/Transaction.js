@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Transaction = ( {transaction} ) => {
+export default ( {transaction} ) => {
   return (
     <tr>
       <td>{transaction.posted_at}</td>
@@ -10,5 +10,3 @@ const Transaction = ( {transaction} ) => {
     </tr>
   )
 }
-
-export default Transaction

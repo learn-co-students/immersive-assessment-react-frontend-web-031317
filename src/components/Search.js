@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Search = ( props ) => {
+export default ( props ) => {
   return (
     <div className="ui huge fluid icon input">
       <input
@@ -11,5 +11,3 @@ const Search = ( props ) => {
     </div>
   )
 }
-
-export default Search
