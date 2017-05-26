@@ -1,7 +1,8 @@
 import React from 'react'
+import Transaction from './Transaction'
 
-const TransactionsList = () => {
-
+const TransactionsList = (props) => {
+// transactions={this.state.transactions} searchTerm={this.state.searchTerm}
   return (
     <table className="ui celled striped padded table">
       <tbody>
@@ -28,7 +29,7 @@ const TransactionsList = () => {
           </th>
         </tr>
 
-        {"... your code here..."}
+        <Transaction className="ui center aligned" transactions={props.transactions}/>
 
       </tbody>
     </table>
