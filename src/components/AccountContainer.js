@@ -12,7 +12,7 @@ class AccountContainer extends Component {
     // and then replace the default transactions with a call to the API
 
     this.state = {
-      searchTerm: 'TEST',
+      searchTerm: '',
       transactions: [
         {
           id: 1,
