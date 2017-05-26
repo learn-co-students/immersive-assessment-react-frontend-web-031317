@@ -10,7 +10,7 @@ const TransactionsList = (props) => {
 
   return (
     <div>
-      { props.searchTerm.length > 0 && <div><h3>Showing Results for: {props.searchTerm}</h3><i className="circular search link icon"></i></div> }
+      { props.searchTerm.length > 0 && <h2>Showing Results for: {props.searchTerm}</h2> } 
       <table className="ui celled striped padded table">
         <tbody>
           <tr>
