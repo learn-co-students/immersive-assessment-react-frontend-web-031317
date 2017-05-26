@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import TransactionsList from './TransactionsList'
+import Transaction from './Transaction'
 import Search from './Search'
 
 class AccountContainer extends Component {
 
   constructor() {
     super()
-
-    // we have provided this default state for you,
-    // use this to get the functionality working
-    // and then replace the default transactions with a call to the API
 
     this.state = {
       searchTerm: '',
@@ -44,17 +41,32 @@ class AccountContainer extends Component {
         }
       ]
     }
+
+  }
+  // transactionSearch(input) {
+  //   fetch('https://boiling-brook-94902.herokuapp.com/transactions')
+  //   .then(response => {
+  //     const transactions = response.data.items
+  //     this.setState({
+  //       transactions
+  //     })
+  //   })
+  // }
+  //
+  handleChange(event) {
+    this.setState = {
+      searchTerm: event.target.value
+    }
   }
 
-  handleChange(event) {
-    // your code here
-  }
+  // componentDidMount() {
+  //   this.transactionSearch()
+  // }
 
   render() {
-
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
+        <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)}/>
         <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
       </div>
     )
