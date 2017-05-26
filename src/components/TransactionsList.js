@@ -1,6 +1,13 @@
 import React from 'react'
+import Transaction from './Transaction'
+import AccountContainer from './AccountContainer'
 
-const TransactionsList = () => {
+const TransactionsList = (props) => {
+  const amounts = props.transactions.map( (transaction, i) => <ul key={i}>{transaction.amount}</ul>)
+  const categories = props.transactions.map( (transaction, i) => <ul key={i}>{transaction.category}</ul>)
+  const descriptions = props.transactions.map( (transaction, i) => <ul key={i}>{transaction.description}</ul>)
+  const postTimes = props.transactions.map( (transaction, i) => <ul key={i}>{transaction.posted_at}</ul>)
+
 
   return (
     <table className="ui celled striped padded table">
@@ -28,7 +35,7 @@ const TransactionsList = () => {
           </th>
         </tr>
 
-        {"... your code here..."}
+        <Transaction postTimes={postTimes} descriptions={descriptions} categories={categories} amounts={amounts} />
 
       </tbody>
     </table>
