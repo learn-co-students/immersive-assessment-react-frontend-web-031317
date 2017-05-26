@@ -1,10 +1,9 @@
 import React from 'react'
 
 const Transaction = (props) => {
-  //console.log(props.transDetail)
-  return (
 
-  	<tr>
+  return (
+	<tr>
       <td>{props.transDetail.posted_at}</td>
       <td>{props.transDetail.description}</td>
       <td>{props.transDetail.category}</td>
