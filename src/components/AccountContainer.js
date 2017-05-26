@@ -44,17 +44,69 @@ class AccountContainer extends Component {
         }
       ]
     }
+
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentDidMount(){
+    fetch('https://boiling-brook-94902.herokuapp.com/transactions')
+    .then(response => {
+      return response.json()
+    }).then(json => {
+      console.log('parsed json', json)
+      const transactionHolder = json.map(function(transaction){
+        return (
+          {
+            id: transaction.id,
+            posted_at: transaction.posted_at,
+            description: transaction.description,
+            category: transaction.category,
+            amount: transaction.amount
+          }
+        )
+
+
+      }, this)
+
+      this.setState({
+        searchTerm: this.state.searchTerm,
+        transactions: transactionHolder
+      })
+    }).catch(function(ex) {
+      console.log('parsing failed', ex)
+    })
+
+
   }
 
   handleChange(event) {
-    // your code here
+    const curses = ["doohickey", "darn", "jerk", "pumpernickel", "shit", "damn", "shoot", "butt", "buttface", "crap", "poop", "fuck", "lake titicaca", "ass"]
+    var theyCursed = false
+
+    curses.forEach(function(curse){
+      if(event.target.value.toLowerCase() === curse){
+        theyCursed = true
+      }
+    })
+
+    if(theyCursed){
+      alert("GET THAT FOUL LANGUAGE OUT OF HERE")
+    }else{
+      this.setState({
+        searchTerm: event.target.value,
+        transactions: this.state.transactions
+      })
+    }
+
+    // console.log(this.state.searchTerm)
   }
 
   render() {
 
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
+        <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange} value={this.state.searchTerm}/>
         <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
       </div>
     )
