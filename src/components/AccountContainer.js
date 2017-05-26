@@ -85,7 +85,7 @@ class AccountContainer extends Component {
       searchTerm: event.target.value,
       transactions: this.state.transactions
     })
-    console.log(this.state.searchTerm)
+    // console.log(this.state.searchTerm)
   }
 
   render() {
