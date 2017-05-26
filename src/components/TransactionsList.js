@@ -29,7 +29,7 @@ const TransactionsList = (props) => {
           </th>
         </tr>
 
-        {props.transactions.map(transaction => <Transaction key={transaction.id} posted_at={transaction.posted_at} id={transaction.id} description={transaction.description} category={transaction.category} amount={transaction.amount}/>)}
+        {props.transactions.map(transaction => <Transaction posted_at={transaction.posted_at} id={transaction.id} description={transaction.description} category={transaction.category} amount={transaction.amount}/>)}
 
       </tbody>
     </table>

@@ -27,7 +27,6 @@ class AccountContainer extends Component {
       })
     })
     .catch(function(err) {
-    	// Error :(
     });
   }
 
@@ -36,14 +35,21 @@ class AccountContainer extends Component {
     this.setState( {searchTerm: event.target.value}, this.filterList)
   }
 
+
   filterList(){
     const account = this
-    var updatedTransactions = this.state.transactions;
+    let updatedTransactions = this.state.transactions;
+    let upTransactions = this.state.transactions;
     updatedTransactions = updatedTransactions.filter(function(transaction){
       return transaction.description.toLowerCase().search(
-        account.state.searchTerm.toLowerCase()) !== -1;
-    });
-    this.setState({filteredTransactions: updatedTransactions});
+        account.state.searchTerm.toLowerCase()) !== -1
+    })
+    upTransactions = upTransactions.filter(function(transaction){
+      return transaction.category.toLowerCase().search(
+        account.state.searchTerm.toLowerCase()) !== -1
+    })
+    this.setState({filteredTransactions: updatedTransactions.concat(upTransactions)});
+
   }
 
   render() {
