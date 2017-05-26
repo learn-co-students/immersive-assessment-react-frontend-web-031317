@@ -14,25 +14,23 @@ const TransactionsList = (props) => {
             <h3 className="ui center aligned header">
               Posted At
             </h3>
-            {'transaction.posted_at'}
+
           </th>
           <th>
             <h3 className="ui center aligned header">
               Description
             </h3>
-            {'transaction.description'}
+
           </th>
           <th>
             <h3 className="ui center aligned header">
               Category
             </h3>
-            {'transaction.category'}
           </th>
           <th>
             <h3 className="ui center aligned header">
               Amount
             </h3>
-            {'transaction.amount'}
           </th>
         </tr>
 

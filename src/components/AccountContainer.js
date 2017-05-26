@@ -43,7 +43,7 @@ class AccountContainer extends Component {
     }
 
   }
-  // transactionSearch(input) {
+  // transactionSearch(searchTerm) {
   //   fetch('https://boiling-brook-94902.herokuapp.com/transactions')
   //   .then(response => {
   //     const transactions = response.data.items
@@ -53,15 +53,20 @@ class AccountContainer extends Component {
   //   })
   // }
   //
+  // handleInputChange(){
+  //
+  // }
+  //
   handleChange(event) {
     this.setState = {
       searchTerm: event.target.value
     }
   }
-
+  //
   // componentDidMount() {
   //   this.transactionSearch()
   // }
+
 
   render() {
     return (
