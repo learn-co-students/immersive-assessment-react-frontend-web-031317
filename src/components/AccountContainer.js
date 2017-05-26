@@ -46,15 +46,36 @@ class AccountContainer extends Component {
     }
   }
 
+  componentDidMount () {
+    var parseJson = function (response) {
+      return response.json();
+    };
+
+    fetch('https://boiling-brook-94902.herokuapp.com/transactions',{
+      method: 'get',
+      headers: {'Accept': 'application/json'}})
+    .then(parseJson)
+    .then( (response)=> this.setState({
+      transactions: response
+    }))
+  }
+
   handleChange(event) {
-    // your code here
+    let searchTerm = event.target.value
+    
+    this.setState({
+      searchTerm,
+      transactions: this.state.transactions.filter( (transaction) => 
+        transaction.description.includes(searchTerm) || transaction.category.includes(searchTerm)
+      )
+    })
   }
 
   render() {
 
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
+        <Search searchTerm={this.state.searchTerm} handleChange={ (event) =>  this.handleChange(event)} />
         <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
       </div>
     )
