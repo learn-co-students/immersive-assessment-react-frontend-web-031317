@@ -46,6 +46,36 @@ class AccountContainer extends Component {
     }
   }
 
+//   fetch(url)
+// .then((resp) => resp.json()) // Transform the data into json
+// .then(function(data) {
+//   // Create and append the li's to the ul
+//   })
+// })
+
+//getting data from API: task 2
+//this took me 30 minutes
+//used code from here: https://stackoverflow.com/questions/39030239/using-fetch-to-render-json-data-in-react-app
+componentDidMount() {
+  var that = this;
+  //var url = 'http://localhost:3000/api/data'
+  var url = "https://boiling-brook-94902.herokuapp.com/transactions"
+
+  fetch(url)
+  .then(function(response) {
+    if (response.status >= 400) {
+      throw new Error("Bad response from server");
+    }
+    return response.json();
+  })
+  .then(function(data) {
+    console.log('data from API: ', data)
+    //that.setState({ person: data.person });
+    that.setState({ transactions: data });
+  });
+}
+
+
   handleChange(event) {
     // your code here
   }

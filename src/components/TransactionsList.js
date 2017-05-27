@@ -52,7 +52,7 @@ const TransactionsList = (props) => {
   //     {transaction.amount}
   //   </div>)
   // })
-
+  //
   // let EachPostAt = transactionPostedAt.map(eachPost => {
   //   return (<div>
   //     {eachPost}
