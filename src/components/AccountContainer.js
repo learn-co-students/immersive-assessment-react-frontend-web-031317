@@ -11,6 +11,7 @@ class AccountContainer extends Component {
     // use this to get the functionality working
     // and then replace the default transactions with a call to the API
 
+
     this.state = {
       searchTerm: '',
       transactions: [
@@ -44,41 +45,65 @@ class AccountContainer extends Component {
         }
       ]
     }
+    this.handleChange = this.handleChange.bind(this)
+    //this.handleSubmit = this.handleSubmit.bind(this)
+    console.log('this.state.searchTerm: ', this.state.searchTerm)
+
+  } //end of class
+
+
+  //   fetch(url)
+  // .then((resp) => resp.json()) // Transform the data into json
+  // .then(function(data) {
+  //   // Create and append the li's to the ul
+  //   })
+  // })
+
+  //getting data from API: task 2
+  //this took me 30 minutes
+  //used code from here: https://stackoverflow.com/questions/39030239/using-fetch-to-render-json-data-in-react-app
+  componentDidMount() {
+    var that = this
+    //var url = 'http://localhost:3000/api/data'
+    var url = "https://boiling-brook-94902.herokuapp.com/transactions"
+
+    fetch(url)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server")
+      }
+      return response.json()
+    })
+    .then(function(data) {
+      console.log('data from API: ', data)
+      //that.setState({ person: data.person })
+      that.setState({ transactions: data })
+    })
   }
 
-//   fetch(url)
-// .then((resp) => resp.json()) // Transform the data into json
-// .then(function(data) {
-//   // Create and append the li's to the ul
-//   })
-// })
 
-//getting data from API: task 2
-//this took me 30 minutes
-//used code from here: https://stackoverflow.com/questions/39030239/using-fetch-to-render-json-data-in-react-app
-componentDidMount() {
-  var that = this;
-  //var url = 'http://localhost:3000/api/data'
-  var url = "https://boiling-brook-94902.herokuapp.com/transactions"
+  // handleChange(event) {
+  //   // your code here
+  // }
 
-  fetch(url)
-  .then(function(response) {
-    if (response.status >= 400) {
-      throw new Error("Bad response from server");
-    }
-    return response.json();
-  })
-  .then(function(data) {
-    console.log('data from API: ', data)
-    //that.setState({ person: data.person });
-    that.setState({ transactions: data });
-  });
-}
+  //user typing into input field updates the state: task 3
+  //this took me about an hour
+  //used code from Dan Abramov codepen: https://codepen.io/gaearon/pen/VmmPgp?editors=0010
 
-
+  ////updating state
   handleChange(event) {
-    // your code here
+    //this.setState({value: event.target.value})
+    this.setState({searchTerm: event.target.value})
+    console.log('searchTerm: ', event.target.value)
   }
+
+  // handleSubmit(event) {
+  //   //alert('A name was submitted: ' + this.state.value);
+  //   console.log('searching for: ' + this.state.searchTerm)
+  //   event.preventDefault();
+  // }
+
+
 
   render() {
 
@@ -86,7 +111,8 @@ componentDidMount() {
       <div>
         <Search
           searchTerm={this.state.searchTerm}
-          handleChange={"...add code here..."}
+          // handleChange={"...add code here..."}
+          handleChange={this.handleChange}
         />
         <TransactionsList
           transactions={this.state.transactions}

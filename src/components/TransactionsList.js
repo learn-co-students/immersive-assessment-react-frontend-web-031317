@@ -3,8 +3,8 @@ import React from 'react'
 import OneRow from './OneRow'
 
 const TransactionsList = (props) => {
-  console.log('TransactionsList props: ', props);
-  console.log('TransactionsList props.transactions: ', props.transactions)
+  //console.log('TransactionsList props: ', props);
+  //console.log('TransactionsList props.transactions: ', props.transactions)
 
   //let transactions = props.transactions //array
 

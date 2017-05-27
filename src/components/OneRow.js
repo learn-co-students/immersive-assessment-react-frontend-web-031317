@@ -1,7 +1,7 @@
 import React from 'react'
 
 const OneRow = (props) => {
-  console.log('OneRow props: ', props)
+  //console.log('OneRow props: ', props)
   return (
     <tr>
       <th>
