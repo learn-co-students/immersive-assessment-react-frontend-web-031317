@@ -3,18 +3,21 @@ import React from 'react'
 import OneRow from './OneRow'
 
 const TransactionsList = (props) => {
-  //console.log('TransactionsList props: ', props);
+  console.log('TransactionsList props: ', props);
   //console.log('TransactionsList props.transactions: ', props.transactions)
 
   //let transactions = props.transactions //array
 
-
-  let rowsOfInfo = props.transactions.map(transaction => {
+  //mapping over filteredResults instead of transactions (filteredResults are our filtered transactions)
+  let allRows = props.filteredResults.map(transaction => {
     return <OneRow
-      postedAt={transaction.posted_at}
-      description={transaction.description}
-      category={transaction.category}
-      amount={transaction.amount}
+      transaction={transaction}
+      //instead passing entire transaction object as a prop
+
+      // postedAt={transaction.posted_at}
+      // description={transaction.description}
+      // category={transaction.category}
+      // amount={transaction.amount}
     />
   })
 
@@ -59,6 +62,10 @@ const TransactionsList = (props) => {
   //   </div>)
   // })
 
+
+//////adding filter:::::::::
+
+
   return (
     <table className="ui celled striped padded table">
       <tbody>
@@ -86,33 +93,7 @@ const TransactionsList = (props) => {
         </tr>
 
         {/* {"... your code here..."} */}
-        {rowsOfInfo}
-
-          {/* <tr>
-            <th>
-              <h3 className="ui center aligned header">
-                {transactionPostedAt}
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                {transactionDescription}
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                {transactionCategory}
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                {transactionAmount}
-              </h3>
-            </th>
-          </tr>
-
-          {"... your code here..."} */}
-
+        {allRows}
 
       </tbody>
     </table>
