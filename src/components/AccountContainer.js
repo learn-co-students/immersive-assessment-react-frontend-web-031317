@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TransactionsList from './TransactionsList'
 import Search from './Search'
+import axios from 'axios';
 
 class AccountContainer extends Component {
 
@@ -13,49 +14,34 @@ class AccountContainer extends Component {
 
     this.state = {
       searchTerm: '',
-      transactions: [
-        {
-          id: 1,
-          posted_at: "2017-02-28 11:00:00",
-          description: "Leather Pants, Gap co.",
-          category: "Fashion",
-          amount: -20000
-        },
-        {
-          id: 2,
-          posted_at: "2017-02-29 10:30:00",
-          description: "Paycheck from Bob's Burgers",
-          category: "Income",
-          amount: 100000
-        },
-        {
-          id: 3,
-          posted_at: "2017-05-24 10:53:00",
-          description: "'Pair Programming Illuminated' by Laurie Williams and Robert Kessler",
-          category: "Book",
-          amount: 1498
-        },
-        {
-          id: 4,
-          posted_at: "2017-05-24 08:52:00",
-          description: "Medium Iced Cold Brew, Gregory's Coffee",
-          category: "Coffee",
-          amount: 365
-        }
-      ]
+      transactions: []
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(event) {
-    // your code here
+  componentDidMount(){
+    const URL = 'https://boiling-brook-94902.herokuapp.com/transactions'
+    axios.get(URL)
+      .then((res) => this.setState({ transactions: res.data })
+    )
   }
+
+  handleChange(term) {
+    this.setState({
+      searchTerm: term
+    })
+  }
+
 
   render() {
+    console.log('accountcontainer', this.state.searchTerm)
+
+    const displayedTransactions = this.state.transactions.filter( trans => trans.description.includes(this.state.searchTerm))
 
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
-        <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
+        <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange} />
+        <TransactionsList transactions={displayedTransactions} />
       </div>
     )
   }
