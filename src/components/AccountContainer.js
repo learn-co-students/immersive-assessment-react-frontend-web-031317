@@ -7,36 +7,41 @@ class AccountContainer extends Component {
 
   constructor() {
     super()
+
+    // we have provided this default state for you,
+    // use this to get the functionality working
+    // and then replace the default transactions with a call to the API
+
     this.state = {
       searchTerm: '',
       transactions: []
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
-
-  componentWillMount(){
+  componentDidMount(){
     const URL = 'https://boiling-brook-94902.herokuapp.com/transactions'
     axios.get(URL)
-    .then(function (response) {
-      console.log('this is a response', response.data);
-      return response.data
-    })
-    this.setState({ transactions: response.data })
-    // console.log('componentwillmount', this)
-    // console.log('state', this.state)
+      .then((res) => this.setState({ transactions: res.data })
+    )
   }
 
-  handleChange(event) {
-    // your code here
+  handleChange(term) {
+    this.setState({
+      searchTerm: term
+    })
   }
 
 
   render() {
+    console.log('accountcontainer', this.state.searchTerm)
+
+    const displayedTransactions = this.state.transactions.filter( trans => trans.description.includes(this.state.searchTerm))
 
     return (
       <div>
-        <Search searchTerm={this.state.searchTerm} handleChange={"...add code here..."} />
-        <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
+        <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange} />
+        <TransactionsList transactions={displayedTransactions} />
       </div>
     )
   }
