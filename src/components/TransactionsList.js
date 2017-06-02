@@ -1,6 +1,11 @@
 import React from 'react'
+import Transaction from './Transaction'
+import { Icon, Popup } from 'semantic-ui-react'
 
-const TransactionsList = () => {
+const TransactionsList = (props) => {
+  const transactions = props.transactions.map((transaction) => {
+    return <Transaction key={transaction.id} transaction={transaction}/>
+  })
 
   return (
     <table className="ui celled striped padded table">
@@ -10,11 +15,13 @@ const TransactionsList = () => {
             <h3 className="ui center aligned header">
               Posted At
             </h3>
+
           </th>
           <th>
             <h3 className="ui center aligned header">
               Description
             </h3>
+
           </th>
           <th>
             <h3 className="ui center aligned header">
@@ -28,7 +35,7 @@ const TransactionsList = () => {
           </th>
         </tr>
 
-        {"... your code here..."}
+        {transactions}
 
       </tbody>
     </table>
