@@ -1,9 +1,10 @@
 import React from 'react'
 import Transaction from './Transaction'
+import { Icon, Popup } from 'semantic-ui-react'
 
 const TransactionsList = (props) => {
   const transactions = props.transactions.map((transaction) => {
-    return <Transaction key={transaction.id} value={transaction}/>
+    return <Transaction key={transaction.id} transaction={transaction}/>
   })
 
   return (
