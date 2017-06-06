@@ -31,19 +31,21 @@ class AccountContainer extends Component {
     this.setState({
       searchTerm: event.target.value
     })
-    // if (this.state.searchTerm.includes?(this.transactions.description)) {
-    //   // some kind of filtering of the results by description that match
-    //   // the changing state of the searchTerm
-    // }
   }
 
+  filter() {
+    return this.state.transactions
+      .filter( transaction => 
+        transaction.description.toLowerCase().includes(this.state.searchTerm.toLowerCase()) 
+      )
+  }
 
   render() {
 
     return (
       <div>
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange} />
-        <TransactionsList transactions={this.state.transactions} searchTerm={this.state.searchTerm} />
+        <TransactionsList transactions={this.filter()} />
       </div>
     )
   }
